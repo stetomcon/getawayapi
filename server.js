@@ -1,5 +1,3 @@
-// SERVER LOCAL DATABASE
-
 const express = require('express')
 const app = express()
 const PORT = 3003
@@ -10,7 +8,7 @@ const cors = require('cors')
 const locationController = require('./controllers/location.js')
 const userController = require('./controllers/user.js')
 
-const whitelist = ['http://localhost:3000', ''] // PLUG IN URL ONCE WE DEPLOY
+const whitelist = ['http://localhost:3000', '']
 const corsOptions = {
     origin: (origin, callback) => {
         if (whitelist.indexOf(origin) !== -1) {
@@ -41,10 +39,6 @@ mongoose.connection.once('open', () => {
     console.log('connected to mongoose...')
 })
 
-mongoose.connect('mongodb://localhost:27017/user', { useNewUrlParser: true })
-mongoose.connection.once('open', () => {
-    console.log('connected to mongoose...')
-})
 
 app.listen(PORT, () => {
     console.log('✈️☁️lets GetAway', PORT)
