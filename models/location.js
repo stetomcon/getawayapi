@@ -3,17 +3,15 @@
 const mongoose = require('mongoose')
 
 const locationSchema = mongoose.Schema({
-    user: { type: String },
+    user: String,
     location: { type: String, required: true },
-    sights: { type: String, maxlength: 7 },
-    month: { type: String },
-    notes: { type: String },
-    restaurant: { type: String },
-    activities: { type: String },
+    sights: [String],
+    month: String,
+    notes: [String],
+    restaurant: [String],
+    activities: [String],
     budget: { type: String, type: Number },
-    url: { type: String },
     img: { type: String, required: true },
-
 });
 
 
