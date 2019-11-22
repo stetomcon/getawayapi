@@ -14,11 +14,6 @@ router.get("/", async (req, res) => {
       },
       mode: "cors"
     });
-    // if (err) {
-    //   res.status(400).json({
-    //     error: err.message
-    //   });
-    // }
     res.status(200).json(response.data);
     console.log(response.data);
   } catch (error) {
