@@ -1,8 +1,7 @@
-// LOCATIONSCHEMA
-
+// DEPENDENCIES
 const mongoose = require("mongoose");
 
-const locationSchema = mongoose.Schema({
+const locationSchema = new mongoose.Schema({
   user: String,
   location: { type: String, required: true },
   sights: [String],
@@ -11,9 +10,7 @@ const locationSchema = mongoose.Schema({
   restaurant: [String],
   activities: [String],
   budget: { type: String, type: Number },
-  img: { type: String }
+  img: String
 });
 
-const location = mongoose.model("location", locationSchema);
-
-module.exports = location;
+module.exports = mongoose.model("Location", locationSchema);

@@ -1,56 +1,70 @@
 // DEPENDENCIES
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
+// const cors = require("cors");
 
-// DEPENDENCY CONFIGURATION
+// DEPENDENCY VARIABLES
 const app = express();
 const PORT = 3003;
 
-// CONTROLLER CONFIGURATION
-const locationController = require("./controllers/location.js");
-const userController = require("./controllers/user.js");
+// CONTROLLER VARIABLES
+const locationsController = require("./controllers/locations.js");
+const usersController = require("./controllers/users.js");
 const flightsController = require("./controllers/flights.js");
 
-// CONNECTION CONFIGURATION
-const whitelist = ["http://localhost:3000", ""];
-const corsOptions = {
-  origin: (origin, callback) => {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  }
-};
-
-// MIDDLEWARE
-app.use(cors(corsOptions));
-app.use(express.json());
-
-app.use("/location", locationController);
-app.use("/user", userController);
-// app.use("/flights", flightsController);
+// CONNECTION VARS
+// const whitelist = ["http://localhost:3000"];
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       callback(new Error("Not allowed by CORS"));
+//     }
+//   }
+// };
 
 //MONGOOSE CONNECTION ERROR HANDLING
 mongoose.connection.on("error", err =>
-  console.log(err.message + " is Mongod not running?")
+  console.log(err.message + " Mongo broke...")
 );
-// MONGOOSE DISCONNECT HANDLING
-mongoose.connection.on("disconnected", () => console.log("mongo disconnected"));
 
-// MONGOOSE CONNECTION
-mongoose.connect("mongodb://localhost:27017/location", {
+// MONGOOSE DISCONNECT HANDLING
+mongoose.connection.on("disconnected", () => {
+  console.log("Mongo disconnected...");
+});
+
+// MONGOOSE CONNECT
+mongoose.connect("mongodb://localhost:27017/locations", {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
   useUnifiedTopology: true
 });
+
+// MONGOOSE CONNECTED
 mongoose.connection.once("open", () => {
-  console.log("connected to mongoose...");
+  console.log("Mongo connected....");
 });
+
+// MIDDLEWARE CONFIGURATION
+// app.use(cors());
+app.use(express.json());
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-TypeError, Accept"
+  );
+  next();
+});
+
+// CONTORLLER CONFIGURATION
+app.use("/locations", locationsController);
+app.use("/users", usersController);
+app.use("/flights", flightsController);
 
 // LISTEN
 app.listen(PORT, () => {
-  console.log("✈️☁️lets GetAway", PORT);
+  console.log("✈️ ☁️ lets GetAway", PORT);
 });
