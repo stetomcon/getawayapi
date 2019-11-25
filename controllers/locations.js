@@ -1,31 +1,31 @@
-//LOCATION CONTROLLER
-
+// DEPENDENCIES
 const express = require("express");
 const router = express.Router();
-const location = require("../models/location.js");
+const Locations = require("../models/locations.js");
 
+// GET - RETRIEVE DATA
 router.get("/", (req, res) => {
-  location.find({}, (err, foundLocation) => {
+  Locations.find({}, (err, foundLocations) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
-    res.status(200).json(foundLocation);
+    res.status(200).json(foundLocations);
   });
 });
 
-//CREATE
+// POST - CREATE NEW LOCATION
 router.post("/", (req, res) => {
-  location.create(req.body, (error, createdLocation) => {
-    if (error) {
-      res.status(400).json({ error: error.message });
+  Locations.create(req.body, (err, createdLocation) => {
+    if (err) {
+      res.status(400).json({ error: err.message });
     }
     res.status(200).send(createdLocation);
   });
 });
 
-//DELETE
+// DELETE - REMOVE LOCATION FROM DATABASE
 router.delete("/:id", (req, res) => {
-  location.findByIdAndRemove(req.params.id, (err, deletedLocation) => {
+  Locations.findByIdAndRemove(req.params.id, (err, deletedLocation) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
@@ -33,9 +33,9 @@ router.delete("/:id", (req, res) => {
   });
 });
 
-//UPDATE
+// PUT - UPDATE LOCATION DETAILS
 router.put("/:id", (req, res) => {
-  LocationSch.findByIdAndUpdate(
+  Locations.findByIdAndUpdate(
     req.params.id,
     req.body,
     { new: true },
@@ -48,4 +48,4 @@ router.put("/:id", (req, res) => {
   );
 });
 
-module.exports = location;
+module.exports = router;
