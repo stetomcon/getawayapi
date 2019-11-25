@@ -5,7 +5,7 @@ const locationSchema = new mongoose.Schema({
   user: String,
   location: { type: String, required: true },
   sights: [String],
-  month: String,
+  month: [Date],
   notes: [String],
   restaurant: [String],
   activities: [String],
