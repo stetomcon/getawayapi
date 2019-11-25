@@ -14,8 +14,8 @@ router.get("/", async (req, res) => {
       },
       mode: "cors"
     });
-    res.status(200).json(response.data);
-    console.log(response.data.data);
+    res.status(200).json(response.data.data);
+    console.log(response.data);
   } catch (error) {
     console.log(error);
   }
