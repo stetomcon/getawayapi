@@ -3,7 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 
-// DEPENDENCY VARIABLES s
+// DEPENDENCY VARIABLES
 const app = express();
 const PORT = 3003;
 
