@@ -15,7 +15,7 @@ router.get("/", (req, res) => {
 
 // POST - CREATE NEW LOCATION
 router.post("/", (req, res) => {
-  Locations.create(req.body, (error, createdLocation) => {
+  Locations.create(req.body, (err, createdLocation) => {
     if (err) {
       res.status(400).json({ error: err.message });
     }
