@@ -5,7 +5,8 @@ const cors = require("cors");
 
 // DEPENDENCY VARIABLES
 const app = express();
-const PORT = 3003;
+const PORT = process.env.PORT || 3003;
+const mongoURI = process.env.MONGODB_URI || "mongodb://localhost:27017/locations";
 
 // CONTROLLER VARIABLES
 const locationsController = require("./controllers/locations.js");
@@ -36,7 +37,7 @@ mongoose.connection.on("disconnected", () => {
 });
 
 // MONGOOSE CONNECT
-mongoose.connect("mongodb://localhost:27017/locations", {
+mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
