@@ -7,7 +7,7 @@ const seedUsers = [
     }
 ];
 ​
-// Seeding function
+// Seeding function ttt
 const seedDB = () => {
   // Declare db name, URI, and instantiate connection
   const dbName = 'locations'
