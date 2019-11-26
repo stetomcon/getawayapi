@@ -9,7 +9,7 @@ const locationSchema = new mongoose.Schema({
   notes: String,
   restaurant: String,
   activities: String,
-  budget: { type: String, type: Number },
+  budget: String,
   img: String
 });
 
