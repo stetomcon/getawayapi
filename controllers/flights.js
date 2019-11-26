@@ -19,12 +19,12 @@ router.get("/", async (req, res) => {
       mode: "cors"
     });
 
-    citydata.data.forEach(city => {
+    await citydata.data.forEach(city => {
       if (city.name === origin) {
         origin = city.code;
       }
     });
-    citydata.data.forEach(city => {
+    await citydata.data.forEach(city => {
       if (city.name === destination) {
         destination = city.code;
       }
