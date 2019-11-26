@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
     const day = req.query.day;
     const month = req.query.month;
     const year = req.query.year;
-    let citydata = await axios({
+    const citydata = await axios({
       method: "GET",
       url: "https://api.travelpayouts.com/data/en/cities.json",
       headers: {
@@ -23,6 +23,8 @@ router.get("/", async (req, res) => {
       if (city.name === origin) {
         origin = city.code;
       }
+    });
+    citydata.data.forEach(city => {
       if (city.name === destination) {
         destination = city.code;
       }
