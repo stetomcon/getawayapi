@@ -3,19 +3,22 @@ const User = require("../models/users");
 const bcrypt = require("bcrypt");
 const router = express.Router();
 
-router.post("/", (req, res) => {
+router.get("/", (req, res) => {
+  console.log(req.query);
   User.findOne(
     {
-      username: req.body.username
+      email: req.query.username
     },
     (err, foundUser) => {
-      if (bcrypt.compareSync(req.body.password, foundUser.password)) {
+      if (bcrypt.compareSync(req.query.password, foundUser.password)) {
         res.status(200).json(foundUser);
         console.log("Found User");
       } else {
-        res.status(400).json({ error: err.message });
         console.log("User Not Found");
+        res.status(400).json({ error: err.message });
       }
     }
   );
 });
+
+module.exports = router;

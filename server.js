@@ -11,6 +11,7 @@ const PORT = 3003;
 const locationsController = require("./controllers/locations.js");
 const usersController = require("./controllers/users.js");
 const flightsController = require("./controllers/flights.js");
+const sessionsController = require("./controllers/sessions.js");
 
 // CONNECTION VARS
 // const whitelist = ["http://localhost:3000"];
@@ -63,6 +64,7 @@ app.use((req, res, next) => {
 app.use("/locations", locationsController);
 app.use("/users", usersController);
 app.use("/flights", flightsController);
+app.use("/sessions", sessionsController);
 
 // LISTEN
 app.listen(PORT, () => {

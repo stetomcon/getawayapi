@@ -4,12 +4,12 @@ const mongoose = require("mongoose");
 const locationSchema = new mongoose.Schema({
   user: String,
   location: { type: String, required: true },
-  sights: [String],
-  month: [Date],
-  notes: [String],
-  restaurant: [String],
-  activities: [String],
-  budget: { type: String, type: Number },
+  sights: String,
+  month: String,
+  notes: String,
+  restaurant: String,
+  activities: String,
+  budget: String,
   img: String
 });
 
